@@ -1,24 +1,28 @@
 echo "Welcome in Flip Coin Combination Problem"$'\n'
 
-declare -A singlet
+declare -A doublet
 
-singleH=0
-singleT=0
+DH=0
+DT=0
+
+flip1=$(( RANDOM%2 ))
+flip2=$(( RANDOM%2 ))
 
 for (( i = 0; i < 100; i++ )); do
-	
-	flip=$(( RANDOM%2 ))
 
-	if [[ $flip -eq 0 ]]; then
-		singlet[$i]=0
-		((singleH++))
-	else
-		singlet[$i]=1
-		((singleT++))
-	fi
-
+if [ $flip1 -eq 0 ] && [ $flip2 -eq 0 ]
+then
+	((DH++))
+	doublet[$i]="HH"
+elif  [ $flip1 -eq 1 ] && [ $flip2 -eq 1 ]
+then
+	((DT++))
+	doublet[$i]="TT"
+fi
 done
 
-echo "Percentage of Heads for Singlet Dictionary:" $singleH%
-echo "Percentage of Tails for Singlet Dictionary:" $singleT% $'\n'
+echo ${doublet[@]}
+
+echo "Percentage of Heads for doublet Dictionary: $DH%
+echo "Percentage of Tails for doublet Dictionary: $DT%$'\n'
 
